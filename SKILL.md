@@ -1,6 +1,30 @@
 ---
 name: factor-debug
-description: 因子崩溃 / 失效 / 数值异常诊断 —— 截面规模 / std / 全 NaN 检查、未来泄漏自检、相关性过高诊断、HORIZON / 标签错配排查、数据 checksum。触发词：因子崩了、CRASH、PermissionError、信号校验失败、score 突然变 NaN、回测全空仓、数据泄露、debug factor。
+description: Use when an agent needs to debug failed, unstable, suspicious, or numerically
+  broken quantitative factors, including NaN checks, signal validation, look-ahead
+  bias probes, horizon mismatch, checksum drift, and correlation violations.
+quantSkills:
+  project_type: skill
+  category: tooling
+  tags:
+  - factor-debug
+  - look-ahead-bias
+  - signal-validation
+  - data-integrity
+  - quant-research
+  platforms:
+  - claude-code
+  - codex
+  - openclaw
+  - cursor
+  status: stable
+  validation_level: listed
+  maintainer_type: community
+  summary_zh: 不是 IDE 调试器，而是因子崩溃 / 失效 / 数值异常的诊断手册：按"症状 → 候选病因 → 验证手段"组织的 9 类速查表，专治"因子跑挂"和"看似太好怀疑有
+    bug"。
+  summary_en: Factor debugging playbook for NaNs, signal validation failures, look-ahead
+    bias, horizon mismatch, checksum drift, and correlation violations.
+  license: GPL-3.0
 ---
 
 # Factor Debug
