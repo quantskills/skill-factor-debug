@@ -27,6 +27,63 @@ quantSkills:
   license: GPL-3.0
 ---
 
+```json qsh-form
+{
+  "version": 1,
+  "task": {
+    "placeholder": "请粘贴报错、异常表现、日志路径、相关代码或最小复现信息",
+    "required": true
+  },
+  "fields": [
+    {
+      "key": "factor",
+      "label": "内置因子",
+      "type": "select",
+      "default": "momentum_20",
+      "help": "若填写了自定义表达式，则以表达式为准",
+      "options": [
+        { "value": "momentum_20", "label": "动量（20日）" },
+        { "value": "reversal_5", "label": "反转（5日）" },
+        { "value": "lowvol_20", "label": "低波动（20日）" },
+        { "value": "alpha101_101", "label": "Alpha101 #101" },
+        { "value": "alpha101_12", "label": "Alpha101 #12" },
+        { "value": "corr_open_vol", "label": "量价背离" }
+      ]
+    },
+    {
+      "key": "expr",
+      "label": "自定义因子表达式",
+      "type": "textarea",
+      "placeholder": "如：-1 * correlation(rank(open), rank(volume), 10)"
+    },
+    {
+      "key": "universe",
+      "label": "股票池",
+      "type": "select",
+      "default": "000300.SH",
+      "options": [
+        { "value": "000300.SH", "label": "沪深300" },
+        { "value": "000905.SH", "label": "中证500" },
+        { "value": "399006.SZ", "label": "创业板指" },
+        { "value": "000852.SH", "label": "中证1000" }
+      ]
+    },
+    {
+      "key": "horizon",
+      "label": "预测周期",
+      "type": "select",
+      "default": "5",
+      "options": [
+        { "value": "1", "label": "未来1日" },
+        { "value": "5", "label": "未来5日" },
+        { "value": "10", "label": "未来10日" }
+      ]
+    }
+  ],
+  "prompt_template": "{{#task}}任务与材料：\n{{task}}\n\n{{/task}}{{#attachments}}用户上传的材料（已放入工作区）：\n{{attachments}}\n\n{{/attachments}}若任务材料中已指明出问题的因子/表达式，以材料为准；否则默认调试因子 {{factor}}{{#expr}}（自定义表达式优先：{{expr}}）{{/expr}}。在股票池 {{universe}}、预测周期 {{horizon}} 日下排查失败、数值异常或可疑结果，先依据日志和最小复现定位根因，再检查 NaN、信号契约、未来函数、周期错配、校验和、相关性与不确定性，输出中文报告。"
+}
+```
+
 # Factor Debug
 
 > 因子跑挂 / 跑出来不对劲 / 怀疑有未来函数。本 skill 是按"症状 → 候选病因 → 验证手段"组织的诊断手册。
